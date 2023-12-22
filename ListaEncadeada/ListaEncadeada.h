@@ -1,12 +1,21 @@
 #ifndef LISTAENCADEADA
 #define LISTAENCADEADA
 
-struct nó {
-    int valor;
-    nó* link = nullptr;
+enum TipoDado {CHAR, INT, DOUBLE};
+
+struct Nó {
+    TipoDado tipoDado;
+    union {
+        char cValor;
+        int iValor;
+        double dValor;
+    };
+    Nó* link = nullptr;
     int testar();
-    void insert(nó);
-    void sendFunction(void(*)());
+    void insert(Nó&);
+    void sendFunction(void(*callback)());
 };
+
+std::ostream& operator<<(std::ostream&, Nó&);
 
 #endif

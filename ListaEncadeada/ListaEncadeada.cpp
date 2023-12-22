@@ -1,16 +1,19 @@
 #include <iostream>
+#include <format>
 #include "ListaEncadeada.h" 
 
-int nó::testar() {
+int Nó::testar() {
     std::cout << "Testado \n";
     return 0;
 }
 
-void nó::insert(nó no)
+//Se passarmos um nó, ele vai inserir uma cópia, por isso vamos passar uma struct como referência.
+void Nó::insert(Nó& no)
 {
 	try
 	{
-		nó::link = &no;
+		//Associamos o link ao endereço do nó recebido pela referência.
+		Nó::link = &no;
 	}
 	catch (const std::exception&)
 	{
@@ -18,14 +21,14 @@ void nó::insert(nó no)
 	}
 }
 
-void nó::sendFunction(void(*function)())
+void Nó::sendFunction(void(*callback)())
 {
 	try
 	{
-		(*function)(); //Executa a função no nó atual
-		while (nó::link != nullptr) //Se tiver próximo nó, executa a função no próximo nó
+		callback(); //Executa a função no nó atual
+		if (Nó::link != NULL) //Se tiver próximo nó, executa a função no próximo nó
 		{
-			(*nó::link).sendFunction(function); 
+			(*Nó::link).sendFunction(callback);
 		}
 		
 	}
@@ -35,3 +38,20 @@ void nó::sendFunction(void(*function)())
 	}
 }
 
+std::ostream& operator<<(std::ostream& out, Nó& no) {
+	//return out << std::format("Nó{valor: {}, link: {} }", no.valor, no.link); Essa linha não funcionou pq format
+	//não é uma função constante.
+	switch (no.tipoDado) {
+		case INT:
+			out << "Nó{valor: " << no.iValor;
+			break;
+		case DOUBLE:
+			out << "Nó{valor: " << no.dValor;
+			break;
+		case CHAR:
+			out << "Nó{valor: " << no.cValor;
+			break;
+	}
+	return out << ", link: " << no.link << " }";
+	
+}
