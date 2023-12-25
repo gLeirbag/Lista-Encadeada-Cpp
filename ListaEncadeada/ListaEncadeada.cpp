@@ -26,7 +26,7 @@ void Nó::sendFunction(void(*callback)())
 	try
 	{
 		callback(); //Executa a função no nó atual
-		if (Nó::link != NULL) //Se tiver próximo nó, executa a função no próximo nó
+		if (Nó::hasNext()) //Se tiver próximo nó, executa a função no próximo nó
 		{
 			(*Nó::link).sendFunction(callback);
 		}
@@ -36,6 +36,54 @@ void Nó::sendFunction(void(*callback)())
 	{
 
 	}
+}
+
+Nó Nó::searchValue(int value) {
+	Nó atual = *this;
+	while (atual.hasNext()) {
+		if (atual.tipoDado != INT)
+		{ 
+			atual = *(atual.link);
+			continue;
+		}
+		else if (atual.iValor == value)
+			return atual;
+
+		atual = *(atual.link);
+	}
+}Nó Nó::searchValue(double value) {
+	Nó atual = *this;
+	while (atual.hasNext()) {
+		if (atual.tipoDado != DOUBLE)
+		{ 
+			atual = *(atual.link);
+			continue;
+		}
+		else if (atual.dValor == value)
+			return atual;
+
+		atual = *(atual.link);
+	}
+}Nó Nó::searchValue(char* value) {
+	Nó atual = *this;
+	while (atual.hasNext()) {
+		if (atual.tipoDado != CHAR)
+		{ 
+			atual = *(atual.link);
+			continue;
+		}
+		else if (atual.cValor == value)
+			return atual;
+
+		atual = *(atual.link);
+	}
+}
+
+bool Nó::hasNext()
+{
+	if (Nó::link != nullptr)
+		return true;
+	return false;
 }
 
 std::ostream& operator<<(std::ostream& out, Nó& no) {
