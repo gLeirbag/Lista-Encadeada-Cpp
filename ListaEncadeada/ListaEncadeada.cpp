@@ -38,45 +38,75 @@ void Nó::sendFunction(void(*callback)())
 	}
 }
 
-Nó Nó::searchValue(int value) {
-	Nó atual = *this;
-	while (atual.hasNext()) {
-		if (atual.tipoDado != INT)
-		{ 
-			atual = *(atual.link);
+Nó* Nó::searchValue(int value) {
+	Nó* atual = this;
+	while (true) {
+		if (atual->tipoDado != INT)
+		{
+			atual = atual->link;
 			continue;
 		}
-		else if (atual.iValor == value)
+		else if (atual->iValor == value)
 			return atual;
 
-		atual = *(atual.link);
-	}
-}Nó Nó::searchValue(double value) {
-	Nó atual = *this;
-	while (atual.hasNext()) {
-		if (atual.tipoDado != DOUBLE)
-		{ 
-			atual = *(atual.link);
+		if (atual->hasNext())
+		{
+			atual = atual->link;
 			continue;
 		}
-		else if (atual.dValor == value)
-			return atual;
-
-		atual = *(atual.link);
+		else
+		{
+			break;
+		}
 	}
-}Nó Nó::searchValue(char* value) {
-	Nó atual = *this;
-	while (atual.hasNext()) {
-		if (atual.tipoDado != CHAR)
+	return nullptr;
+}
+Nó* Nó::searchValue(double value) {
+	Nó* atual = this;
+	while (true) {
+		if (atual->tipoDado != DOUBLE)
 		{ 
-			atual = *(atual.link);
+			atual = atual->link;
 			continue;
 		}
-		else if (atual.cValor == value)
+		else if (atual->dValor == value)
 			return atual;
 
-		atual = *(atual.link);
+		if (atual->hasNext())
+		{
+			atual = atual->link;
+			continue;
+		}
+		else
+		{
+			break;
+		}
 	}
+	return nullptr;
+}
+
+Nó* Nó::searchValue(char* value) {
+	Nó* atual = this;
+	while (true) {
+		if (atual->tipoDado != CHAR)
+		{
+			atual = atual->link;
+			continue;
+		}
+		else if (atual->cValor == value)
+			return atual;
+
+		if (atual->hasNext())
+		{
+			atual = atual->link;
+			continue;
+		}
+		else
+		{
+			break;
+		}
+	}
+	return nullptr;
 }
 
 bool Nó::hasNext()
@@ -84,6 +114,23 @@ bool Nó::hasNext()
 	if (Nó::link != nullptr)
 		return true;
 	return false;
+}
+
+//Retorna o nó desassociado do link
+Nó Nó::clearLink()
+{
+	try {
+		if (Nó::hasNext())
+		{
+			Nó excluido = *Nó::link;
+			Nó::link = nullptr;
+			return excluido;
+		}
+	}
+	catch (const std::exception&)
+	{
+
+	}
 }
 
 std::ostream& operator<<(std::ostream& out, Nó& no) {

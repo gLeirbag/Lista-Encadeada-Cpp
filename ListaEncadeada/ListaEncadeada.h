@@ -6,7 +6,7 @@ enum TipoDado {CHAR, INT, DOUBLE};
 struct Nó {
     TipoDado tipoDado;
     union {
-        char* cValor;
+        const char* cValor;
         int iValor;
         double dValor;
     };
@@ -15,10 +15,11 @@ struct Nó {
     int testar();
 
     void insert(Nó&);
+    Nó clearLink();
     void sendFunction(void(*callback)());
-    Nó searchValue(int value);
-    Nó searchValue(double value);
-    Nó searchValue(char* value);
+    Nó* searchValue(int value);
+    Nó* searchValue(double value);
+    Nó* searchValue(char* value);
     bool hasNext();
 };
 
