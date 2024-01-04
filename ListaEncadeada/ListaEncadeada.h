@@ -1,9 +1,11 @@
 #ifndef LISTAENCADEADA
 #define LISTAENCADEADA
+#include <iostream>
 
 enum TipoDado {CHAR, INT, DOUBLE};
 
 struct Nó {
+    bool isHead = true;
     TipoDado tipoDado;
     union {
         const char* cValor;

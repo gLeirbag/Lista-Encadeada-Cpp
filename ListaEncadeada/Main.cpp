@@ -1,5 +1,6 @@
 #include <iostream>
 #include "ListaEncadeada.h" 
+#include "Graph.h"
 
 using namespace std;
 
@@ -21,12 +22,14 @@ int main() {
     //out << "no2.valor: " << nó2.valor << " no2 link: " << nó2.link << " no2.link->valor: " << (*nó2.link).valor << "\n";
     nó1.insert(nó2);
     nó2.insert(nó3);
-    cout << nó1 << endl;
+    //cout << nó1 << endl;
     //cout << *nó1.searchValue(1.76);
 
     //nó1.sendFunction(printar);
 
-
+    mostrarLista(nó1);
+    
+    mostrarLista(nó2);
 
     return 0;
 }

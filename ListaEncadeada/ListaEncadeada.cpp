@@ -13,6 +13,7 @@ void Nó::insert(Nó& no)
 	try
 	{
 		//Associamos o link ao endereço do nó recebido pela referência.
+		no.isHead = false;
 		Nó::link = &no;
 	}
 	catch (const std::exception&)
