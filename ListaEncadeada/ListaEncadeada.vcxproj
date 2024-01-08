@@ -136,6 +136,13 @@
   <ItemGroup>
     <ClInclude Include="Graph.h" />
     <ClInclude Include="ListaEncadeada.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ListaEncadeada.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="readme.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
